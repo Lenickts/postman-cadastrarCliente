@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik+Wet+Paint&family=Shadows+Into+Light&family=Telex&display=swap&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* Josefin / Rubik Wet / Telex / Gloria Hallelujah / Roboto Mono */
+
+:root{
+    --fonte-titulo: "Rubik Wet Paint", system-ui;
+    --fonte-main: 'Telex';
+    --fonte-sec:"Josefin Sans", sans-serif;
+    --fonte-robo: "Roboto Mono", monospace;
+    --fonte-Generic: "Montserrat", sans-serif;
+    --shadow: 3px 3px 7px 7px #DEB887;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+    background-color: #A9A9A9;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    height: 70vh;
+    font-family: var(--fonte-Generic);
+}
+form{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+.agrupar-input{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+label{
+    font-weight: 600;
+}
+input{
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    font-family: var(--fonte-robo);
+    background-color: #F5F5F5;
+}
+#listaCadastros{
+    list-style: none;
+}
+button{
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    font-family: var(--fonte-robo);
+    color: #fff;
+    cursor: pointer;
+}
+#btn, #btn-att{
+    background-color: #198754;
+    font-weight: 600;
+}
+#btn:hover, #btn-att:hover{
+    background-color: #0cee84;
+    color: #000;
+    font-weight: 600;
+}
+.excluir{
+    background-color: #dc3545;
+    width: 30px;
+    height: 30px;
+}
+.excluir:hover{
+    background-color: #ec0c22;
+    font-weight: 600;
+}
+#listaCadastros{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#listaCadastros li{
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
