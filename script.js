@@ -1,4 +1,6 @@
 const cadastro = document.getElementById("listaCadastros");
+
+//OBS: Não usei o site crud crud porque expirou meu endpoint
 const urlAPI = "https://retoolapi.dev/LmDc7h/cadastro"
 
 //Função para carregar os cadastros da API
