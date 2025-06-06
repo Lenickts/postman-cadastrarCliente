@@ -17,13 +17,11 @@
 
             <button type="button" id="btn">Cadastrar</button>
         </form>
-        <ul id="listaCadastros">
-            
-        </ul>
+        <div>
+            <ul id="listaCadastros"></ul>
+            <button id="btn-att" onclick="atualizarDados()">Atualizar lista</button>
+        </div>        
     </main>
     <script src="script.js"></script>
 </body>
 </html>
-
-<!-- Exemplo do botao excluir da outra atividade no JS:
-    item.innerHTML = `${tarefa.descricao} <button class="excluir" data-id="${tarefa._id}">X</button>`; -->

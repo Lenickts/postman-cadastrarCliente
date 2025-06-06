@@ -1,15 +1,23 @@
 const cadastro = document.getElementById("listaCadastros");
+const urlAPI = "https://retoolapi.dev/LmDc7h/cadastro"
 
-//Buscar todas as tarefas cadastradas
-fetch("https://crudcrud.com/api/b5aceeb886f44cf48dc6e6316723b945/cadastro")
+//Função para carregar os cadastros da API
+function atualizarDados() {
+    cadastro.innerHTML = "";
+    //Buscar todos os cadastros
+    fetch(urlAPI)
     .then(apiReturn => apiReturn.json()) //Converte o corpo da resposta em objeto JS
     .then((listaDeCadastros) => {
         listaDeCadastros.forEach(cliente => {
             const item = document.createElement("li");
-            item.innerHTML = `${cliente.nome} - ${cliente.email || "Sem e-mail"} <button class="excluir" data-id="${cliente._id}">X</button>`;
+            item.innerHTML = `${cliente.nome} - ${cliente.email || "Sem e-mail"} <button class="excluir" data-id="${cliente.id}">X</button>`;
             cadastro.appendChild(item);
         });
     });
+}
+
+//Carrega cadastros ao abrir a página
+atualizarDados();
 
 //Adicionar um novo cadastro
 document.getElementById("btn").addEventListener("click", () => {
@@ -23,7 +31,7 @@ document.getElementById("btn").addEventListener("click", () => {
     }
 
     const novoCadastro = { nome, email };
-    fetch("https://crudcrud.com/api/b5aceeb886f44cf48dc6e6316723b945/cadastro", {
+    fetch(urlAPI, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -31,27 +39,33 @@ document.getElementById("btn").addEventListener("click", () => {
         body: JSON.stringify(novoCadastro)
     })
     
-        //Converte o corpo da resposta em objeto JS
-        .then(resposta => resposta.json())
-        .then((cadastro) => {
-            //Já temos o retorno dado pela API dos objetos
-            const item = document.createElement("li");
-            item.innerHTML = `${cadastro.nome} - ${cadastro.email || "Sem e-mail"} <button class="excluir" data-id="${cadastro._id}">X</button>`;
-            cadastro.appendChild(item);
-        });
+    //Converte o corpo da resposta em objeto JS
+    .then(resposta => resposta.json())
+    .then(() => {
+        document.getElementById("nome").value = "";
+        document.getElementById("email").value = "";
+        atualizarDados(); //Recarrega a lista após adicionar
+    });
 });
 
 //Remover cadastro
-cadastro.addEventListener("click", (evento) => {
-    if (evento.target.classList.contains("excluir")) {
-        const id = evento.target.dataset.id; //armazena os id da API numa variável
-        fetch(`https://crudcrud.com/api/b5aceeb886f44cf48dc6e6316723b945/cadastro/${id}`, {
-            method: "DELETE"
-        })
-        .then(() => {
-            //Remove o <li> do DOM
-            evento.target.parantElement.remove();
-        })
-        .catch(erro => console.error("Erro ao excluir", erro));
+cadastro.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("excluir")) {
+        const id = event.target.dataset.id;
+        
+        try {
+            const response = await fetch(`${urlAPI}/${id}`, {
+                method: "DELETE"
+            });
+            
+            if (response.ok) {
+                // Só remove do DOM se a API confirmar a exclusão
+                event.target.parentElement.remove();
+            } else {
+                console.error("Falha na API:", response.status);
+            }
+        } catch (erro) {
+            console.error("Erro ao excluir:", erro);
+        }
     }
 });
